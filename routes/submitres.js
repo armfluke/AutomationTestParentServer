@@ -20,7 +20,7 @@ router.post('/', function(req,res){
     db.close();
 });
 console.log(req.body);
-res.json({"status":"ok"});
+res.send(req.body);
 });
 
 module.exports = router;

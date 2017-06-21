@@ -1,4 +1,7 @@
 extends layout
 
 block content
-  p Total items in test database = #{title}
+  table
+    each result in results
+      tr#result_list_item    
+          td #{result.result}

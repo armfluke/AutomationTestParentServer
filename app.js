@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var submitres = require('./routes/submitres');
 var getres = require('./routes/getres');
-var init = require('./routes/init');
+var init = require('./routes/init').router;
 var test = require('./routes/test');
 
 var app = express();

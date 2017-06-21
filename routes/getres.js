@@ -10,14 +10,25 @@ router.get('/', function(req,res,next){
   mongoclient.connect(url, function(err,db){
 
     var collection = db.collection("tests");
-    /*
-    collection.find({})
 
-    */
+    /*
+
     collection.count({}, function(err,count){
     totalitems = count; 
     console.log(totalitems);
     res.render('index', { title: totalitems.toString() });
+    })
+  
+    */
+    collection.find({}).toArray(function(err, result){
+      
+      if (err){
+        res.send(err); 
+      } else if (result.length){
+        res.render('index', {"results" : result});
+      } else {
+        res.send('No documents found');
+      }
     })
     db.close();
   });
