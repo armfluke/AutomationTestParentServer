@@ -7,16 +7,19 @@ var ips = [];
 
 router.get('/', function(req,res,next){
     res.send({status: "OK"});
+    var name = req.query.name;
+    var url = req.query.url;
+    var test = req.query.test;
     var c = 0;
     ips = ipgetter.get();
     while(c < ips.length){
-        var url = 'http://' + ips[c].ip + '/test'
-        console.log(url);
-        request(url ,{json:{name: "EikonLight"}}, function(error, response, body){
+        var childurl = 'http://' + ips[c].ip + '/test'
+        console.log(childurl);
+        request(childurl ,{json:{name: name, url: url, test: test}}, function(error, response, body){
             console.log('error:', error); // Print the error if one occurred
             if(error){
                 for(let i=0;i<ips.length;i++){
-                    if(ips[i].ip == error.address+':3000'){
+                    if(ips[i].ip == error.address+':'+error.port){
                         ips.pop(i);
                         break;
                     }
@@ -27,9 +30,25 @@ router.get('/', function(req,res,next){
             console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received 
             console.log('body:', body);
             console.log('***********');
-    })
-    c++
+        })
+        c++
     }  
+});
+
+router.get('/:ip', function(req,res,next){
+    res.send({status: "OK"});
+    var ip = req.params.ip;
+    var name = req.query.name;
+    var url = req.query.url;
+    var childurl = 'http://' + ip + '/test'
+    console.log(childurl);
+    request(childurl ,{json:{name: name,url: url}}, function(error, response, body){
+        console.log('error:', error); // Print the error if one occurred
+        console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received 
+        console.log('body:', body);
+        console.log('***********');
+    })
+  
 });
 
 module.exports = router; 
