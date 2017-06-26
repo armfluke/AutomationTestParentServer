@@ -25,7 +25,7 @@ router.get('/', function(req,res,next){
                     }
                 }
                 c--;
-                console.log("Remove "+error.address+" from ips");
+                console.log("Remove "+error.address+":"+error.port+" from ips");
             }
             console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received 
             console.log('body:', body);
