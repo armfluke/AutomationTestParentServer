@@ -21,19 +21,23 @@ router.post('/', function(req,res){
     });
 
     mongoclient.connect(url, function(err,db){
-
-    var collection = db.collection("tests");
-    
-    collection.insert(req.body, function (err,doc) {
-        if (err) {
-           console.log(err);
-           res.send("There was an error adding the information to the database");
-        } 
+        if(err){
+            console.log(err);
+            res.send(err);
+        }else{
+            var collection = db.collection("tests");
+            
+            collection.insert(req.body, function (err,doc) {
+                if (err) {
+                    console.log(err);
+                    res.send("There was an error adding the information to the database");
+                } 
+            });
+            db.close();
+        }
     });
-    db.close();
-});
-console.log(req.body);
-res.send(req.body);
+    console.log(req.body);
+    res.send(req.body);
 });
 
 module.exports = router;
