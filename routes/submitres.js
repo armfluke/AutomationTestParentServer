@@ -34,10 +34,10 @@ router.post('/', function(req,res){
                 } 
             });
             db.close();
+            console.log(req.body);
+            res.send(req.body);
         }
     });
-    console.log(req.body);
-    res.send(req.body);
 });
 
 module.exports = router;
