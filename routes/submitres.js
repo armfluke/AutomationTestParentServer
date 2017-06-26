@@ -26,7 +26,6 @@ router.post('/', function(req,res){
             res.send(err);
         }else{
             var collection = db.collection("tests");
-            
             collection.insert(req.body, function (err,doc) {
                 if (err) {
                     console.log(err);
@@ -35,7 +34,7 @@ router.post('/', function(req,res){
             });
             db.close();
             console.log(req.body);
-            res.send(req.body);
+            res.send(req.body.result);
         }
     });
 });
