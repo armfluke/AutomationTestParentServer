@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var url ="mongodb://localhost:27017/TestInstall";
+var config = require('../config.json');
+var url = config.url;
 var mongoclient = require('mongodb').MongoClient;
 var fs = require("fs");
 
