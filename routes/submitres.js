@@ -4,9 +4,16 @@ var config = require('../config.json');
 var url = config.url;
 var mongoclient = require('mongodb').MongoClient;
 var fs = require("fs");
+var doneip = [];
+
+var getdone = function getdoneip(){
+    return doneip;
+}
 
 
 router.post('/', function(req,res){
+
+    console.log(JSON.parse(req.body.result).ip);
 
     var testLogsPath = __dirname
     testLogsPath = testLogsPath.substr(0, testLogsPath.length - 7)
@@ -40,4 +47,5 @@ router.post('/', function(req,res){
     });
 });
 
-module.exports = router;
+module.exports.router = router;
+module.exports.getdone = getdone; 
