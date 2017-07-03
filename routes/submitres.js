@@ -12,9 +12,9 @@ var getdone = function getdoneip(){
 
 
 router.post('/', function(req,res){
-
-    console.log(JSON.parse(req.body.result).ip);
-
+    let ip = JSON.parse(req.body.result).ip
+    console.log(ip);
+    doneip.push(ip)
     var testLogsPath = __dirname
     testLogsPath = testLogsPath.substr(0, testLogsPath.length - 7)
     fs.mkdir(testLogsPath + "/TestLogs/" + JSON.parse(req.body.result).time,function(error){
